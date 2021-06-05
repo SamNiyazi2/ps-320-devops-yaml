@@ -3,12 +3,15 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-trigger:
- batch: true
- branches:
-  include:
-   - main
-   - test-build-branch
+#trigger:
+# batch: true
+
+schedules:
+- cron: "*/5 * * * *"
+  branches:
+   include:
+    - main
+    - test-build-branch
 
 pool:
  name: ssn-self-hosted-pool-20210604
