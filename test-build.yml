@@ -5,6 +5,7 @@
 
 trigger:
 - main
+- test-build-branch
 
 pool:
  name: ssn-self-hosted-pool-20210604
