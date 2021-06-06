@@ -1,0 +1,31 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+# 06/05/2021 09:48 pm - SSN - Added solution file
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Docker Build v2
+    pool:
+     name: ssn-self-hosted-pool-20210604
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        command: build
+        dockerfile: '$(Build.SourcesDirectory)/webapp/Dockerfile'
+        tags: |
+          $(tag)
