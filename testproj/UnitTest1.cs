@@ -15,6 +15,7 @@ namespace testproj
 
 
         [TestMethod]
+        [TestCategory("Suite1")]
         public void LongRunningTest1()
         {
             Thread.Sleep(30000);
@@ -23,6 +24,7 @@ namespace testproj
 
 
         [TestMethod]
+        [TestCategory("Suite2")]
         public void LongRunningTest2()
         {
             Thread.Sleep(30000);
