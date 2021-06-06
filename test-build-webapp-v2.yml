@@ -36,7 +36,7 @@ jobs:
    pool:
        name: ssn-self-hosted-pool-20210604
    steps:
-    - script: dotnet test "$(Build.SourcesDirectory)\testproj\testproj.csproj" -filter TestCategory=Suite1
+    - script: dotnet test "$(Build.SourcesDirectory)\testproj\testproj.csproj" --filter TestCategory=Suite1
       displayName: 'Running tests - Suite1'
  - job: TestSuite2
    displayName: 'Execute test suite 2'
@@ -44,6 +44,6 @@ jobs:
    pool:
        name: ssn-self-hosted-pool-20210604
    steps:
-    - script: dotnet test "$(Build.SourcesDirectory)\testproj\testproj.csproj" -filter TestCategory=Suite2
+    - script: dotnet test "$(Build.SourcesDirectory)\testproj\testproj.csproj" --filter TestCategory=Suite2
       displayName: 'Running tests - Suite2'
 
