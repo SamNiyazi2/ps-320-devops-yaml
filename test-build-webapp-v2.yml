@@ -1,0 +1,27 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+# 06/25/2021 09:57 pm - SSN - Redo after adding solution file
+
+#trigger:
+# batch: true
+
+schedules:
+- cron: "*/5 * * * *"
+  branches:
+   include:
+    - main
+    - test-build-branch
+
+pool:
+  name: ssn-self-hosted-pool-20210604
+
+  
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
