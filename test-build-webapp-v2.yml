@@ -22,9 +22,28 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
-- script: dotnet test "$(Build.SourcesDirectory)\testproj\testproj.csproj"
-  displayName: 'Running tests'
+jobs:
+ - job: Compile
+   displayName: 'Compile the code'
+   pool:
+    name: ssn-self-hosted-pool-20210604
+   steps:
+   - script: dotnet build --configuration $(buildConfiguration)
+     displayName: 'dotnet build $(buildConfiguration)'
+ - job: TestSuite1
+   displayName: 'Execute test suite 1'
+   dependsOn: Compile
+   pool:
+       name: ssn-self-hosted-pool-20210604
+   steps:
+    - script: dotnet test "$(Build.SourcesDirectory)\testproj\testproj.csproj" -filter TestCategory=Suite1
+      displayName: 'Running tests - Suite1'
+ - job: TestSuite2
+   displayName: 'Execute test suite 2'
+   dependsOn: Compile
+   pool:
+       name: ssn-self-hosted-pool-20210604
+   steps:
+    - script: dotnet test "$(Build.SourcesDirectory)\testproj\testproj.csproj" -filter TestCategory=Suite2
+      displayName: 'Running tests - Suite2'
 
